@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: demo
+  namespace: argocd
+spec:
+  description: Project giới hạn cho các bài lab Argo CD
+  sourceRepos:
+    - https://github.com/linhdo04/argocd-learning.git
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: demo
+    - server: https://kubernetes.default.svc
+      namespace: demo-*
+  orphanedResources:
+    warn: true
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  clusterResourceWhitelist: []
